@@ -1,10 +1,16 @@
 import Task from "./Task";
 
-function TaskList({ tasks, onDelete, onToggle }) {
+const EMPTY_MESSAGES = {
+  Active: "No active tasks — enjoy the break! 🎉",
+  Completed: "No completed tasks yet, get to work! 💪",
+  All: "No tasks found. Add one to get started!",
+};
+
+function TaskList({ tasks, onDelete, onToggle, filter, onEdit }) {
   if (tasks.length === 0) {
     return (
       <div className="text-center mt-10 font-semibold">
-        No work today. Rest! ☕
+        {EMPTY_MESSAGES[filter]}
       </div>
     );
   }
@@ -16,6 +22,7 @@ function TaskList({ tasks, onDelete, onToggle }) {
           task={task}
           onDelete={onDelete}
           onToggle={onToggle}
+          onEdit={onEdit}
         />
       ))}
     </ul>
